@@ -1,11 +1,12 @@
-describe('sample render test', () => {
-  beforeEach(() => {
-    cy.visit('/');
-  });
+// basic.cy.js
 
-  it('displays the title text', () => {
-    cy.log('Before get');
-    cy.get('h1', { timeout: 20000 }).should('contain', 'Next.js Blog Theme');
-    cy.log('After get');
+describe('teste de renderização de exemplo', () => {
+  it('exibe o texto do título', () => {
+    cy.visit('/'); // Ajuste a URL conforme necessário
+    cy.get('h1').should('be.visible').then(($h1) => {
+      const texto = $h1.text();
+      console.log('Texto em h1:', texto);
+      expect(texto).to.contain('Next.js Blog Theme');
+    });
   });
 });
