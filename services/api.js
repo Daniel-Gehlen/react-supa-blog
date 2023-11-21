@@ -1,11 +1,29 @@
 import axios from 'axios';
+import { createClient } from '@supabase/supabase-js';
+import dotenv from 'dotenv';
 
+// Carrega as variáveis de ambiente do arquivo .env
+dotenv.config();
+
+// Carrega as variáveis de ambiente
+const supabaseUrl = process.env.SUPABASE_URL;
+const supabaseKey = process.env.SUPABASE_KEY;
+const commonApiKey = process.env.COMMON_API_KEY;
+const commonAuthorization = process.env.COMMON_AUTHORIZATION;
+
+console.log('supabaseUrl:', supabaseUrl);
+console.log('supabaseKey:', supabaseKey);
+console.log('commonApiKey:', commonApiKey);
+console.log('commonAuthorization:', commonAuthorization);
+
+// Cria o cliente Supabase
+const supabase = createClient(supabaseUrl, supabaseKey);
+
+// Configura a instância do Axios
 export const api = axios.create({
   baseURL: 'https://excjncldkxfgkcjxttqp.supabase.co/rest/v1',
   headers: {
-    common: {
-      'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV4Y2puY2xka3hmZ2tjanh0dHFwIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTY5OTkzMDczOSwiZXhwIjoyMDE1NTA2NzM5fQ.TfRLF1txpkQnJaRaZ5EWZ0s0qltbAfHna1XJ1aSM0Jo',
-      'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV4Y2puY2xka3hmZ2tjanh0dHFwIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTY5OTkzMDczOSwiZXhwIjoyMDE1NTA2NzM5fQ.TfRLF1txpkQnJaRaZ5EWZ0s0qltbAfHna1XJ1aSM0Jo'
-    },
+    'apikey': commonApiKey,
+    'Authorization': `${commonAuthorization}`,
   },
 });
